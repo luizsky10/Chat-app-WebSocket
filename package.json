@@ -6,7 +6,10 @@
   "scripts": {
     "start": "nodemon src/index.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.2"
+  },
   "devDependencies": {
     "nodemon": "1.18.4"
   },

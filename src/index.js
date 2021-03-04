@@ -1,9 +1,17 @@
-var http = require("http");
+const app = require("express")();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
-//create a server object:
-http
-  .createServer(function(req, res) {
-    res.write("Hello World!"); //write a response to the client
-    res.end(); //end the response
-  })
-  .listen(8080); //the server object listens on port 8080
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
+  });
+});
+
+http.listen(3000, () => {
+  console.log("listening on *:3000");
+});
